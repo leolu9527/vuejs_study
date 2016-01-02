@@ -20,12 +20,41 @@
     <component :is="currentView" transition="fade" transition-mode="out-in">
     </component>
 
+
     <input type="radio" value="home" v-model="currentView"  checked name="view">a
     <input type="radio" value="posts" v-model="currentView" name="view">b
+
+
+    <home v-for="item in 4"></home>
 </div>
 </body>
 <script type="text/javascript">
     //多个组件可以使用同一个挂载点，然后动态地在它们之间切换。使用保留的 <component> 元素，动态地绑定到它的 is 特性：
+
+    /*
+    * 下面几种情况会让实例变成一个片断实例：
+
+     模板包含多个顶级元素。
+     模板只包含普通文本。
+     模板只包含其它组件（其它组件可能是一个片段实例）。
+     模板只包含一个元素指令，如 <partial> 或 vue-router 的 <router-view>。
+     模板根节点有一个流程控制指令，如 v-if 或 v-for。
+     这些情况让实例有未知数量的顶级元素，它将把它的 DOM 内容当作片断。片断实例仍然会正确地渲染内容。不过，它没有一个根节点，它的 $el 指向一个锚节点，即一个空的文本节点（在开发模式下是一个注释节点）。
+
+     但是更重要的是，组件元素上的非流程控制指令，非 prop 特性和过渡将被忽略，因为没有根元素供绑定：
+
+    <!-- 不可以，因为没有根元素 -->
+    //<example v-show="ok" transition="fade"></example>
+
+        <!-- props 可以 -->
+    //<example :prop="someData"></example>
+
+        <!-- 流程控制可以，但是不能有过渡 -->
+    //<example v-if="ok"></example>
+
+    */
+
+
 
 
 

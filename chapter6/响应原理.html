@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>响应</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message  }}
+    {{ b  }}
+</div>
+</body>
+<script type="text/javascript">
+    //    注意：Vue.js 不能检测到对象属性的添加或删除
+    //因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的
+    var data = {message:'hello Vue.js!'};
+    var vm = new Vue({
+        el: '#app',
+        data: data,
+        created: function () {//钩子
+            // `this` 指向 vm 实例
+            console.log('message is: ' + this.message)
+        }
+    });
+
+    //vm.b = 2//不响应
+
+    vm.$set('b', 2)  //响应
+
+    //Vue.set(data, 'c', 3)  响应
+
+    //有时你想向已有对象上添加一些属性，例如使用 Object.assign() 或 _.extend() 添加属性。但是，添加到对象上的新属性不会触发更新。这时可以创建一个新的对象，包含原对象的属性和新的属性：
+
+// 不使用 `Object.assign(this.someObject, { a: 1, b: 2 })`
+    //this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+
+
+</script>
+</html>
