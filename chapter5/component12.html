@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>slot</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+<!-- 子组件模板 -->
+<template id="child-template">
+    <slot></slot>
+    <slot name="a1"></slot>
+</template>
+
+<!-- 父组件模板 -->
+<div id="events-example">
+    efefefe
+    <child>
+        {{ msg }}
+
+    </child>
+    <p name="a1">{{ msg }}</p>
+</div>
+</body>
+<script type="text/javascript">
+
+    Vue.component('child', {
+        template: '#child-template',
+        data: function () {
+            return { msg: 'hello' }
+        }
+
+    });
+
+
+    var parent = new Vue({
+        el: '#events-example',
+        data: {
+            msg: 1
+
+        }
+    });
+
+
+</script>
+</html>

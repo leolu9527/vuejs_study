@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>使用Slot分发内容  动态组件</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<style>
+    .fade-transition {
+        transition: opacity .3s ease;
+    }
+    .fade-enter, .fade-leave {
+        opacity: 0;
+    }
+</style>
+<body>
+<div id="demo">
+
+    <!-- 先淡出再淡入 -->
+    <div :is="currentView" transition="fade" transition-mode="out-in">
+    </div>
+
+    <input type="radio" value="home" v-model="currentView"  checked name="view">a
+    <input type="radio" value="posts" v-model="currentView" name="view">b
+</div>
+
+
+</body>
+<script type="text/javascript">
+    //组件组合,混合父组件的内容与子组件自己的模板
+    //使用特殊的 <slot> 元素作为原始内容的插槽
+    //父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译
+    /*
+    <app>
+    <app-header></app-header>
+    <app-footer></app-footer>
+    </app>
+    */
+
+
+    //<slot> 元素有一个特殊特性 name，用于配置如何分发内容。多个 slot 可以有不同的名字。命名 slot 将匹配有对应 slot 特性的内容片断。
+
+    //也可以有一个未命名 slot，它是默认 slot，作为找不到匹配内容的回退插槽。如果没有默认的 slot，不匹配内容将被抛弃。
+
+    //动态组件
+    //多个组件可以使用同一个挂载点，然后动态地在它们之间切换。使用保留的 <component> 元素，动态地绑定到它的 is 特性：
+    //如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 keep-alive 指令参数
+
+    //<component :is="currentView" keep-alive>
+        <!-- 非活动组件将被缓存 -->
+    //</component>
+
+    //在切换组件时，切入组件在切入前可能需要进行一些异步操作。为了控制组件切换时长，给切入组件添加 activate 钩子
+
+    //transition-mode 特性用于指定两个动态组件之间如何过渡。
+
+    new Vue({
+        el: '#demo',
+        data: {
+            currentView: 'home'
+        },
+        components: {
+            home: {template:'efefef1'},
+            posts: {template:'efefef2'},
+            archive: {template:'efefef3'}
+        }
+    })
+
+</script>
+</html>

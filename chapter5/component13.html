@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<style>
+    .fade-transition {
+        transition: opacity .3s ease;
+    }
+    .fade-enter, .fade-leave {
+        opacity: 0;
+    }
+</style>
+<body>
+
+<div id="demo">
+    <!-- 先淡出再淡入 -->
+    <component :is="currentView" transition="fade" transition-mode="out-in">
+    </component>
+
+    <input type="radio" value="home" v-model="currentView"  checked name="view">a
+    <input type="radio" value="posts" v-model="currentView" name="view">b
+</div>
+</body>
+<script type="text/javascript">
+    //多个组件可以使用同一个挂载点，然后动态地在它们之间切换。使用保留的 <component> 元素，动态地绑定到它的 is 特性：
+
+
+
+    Vue.component('home', {
+        template:'<a>1</a>',
+        activate: function (done) {//在切换组件时，切入组件在切入前可能需要进行一些异步操作。为了控制组件切换时长，给切入组件添加 activate 钩子
+            var self = this
+            console.log('home');
+            done();
+        }
+    })
+
+    new Vue({
+        el: '#demo',
+        data: {
+            currentView: 'home'
+        },
+        components: {
+            posts: {template:'<a>2</a>'},
+            archive: {template:'<a>3</a>'}
+        }
+    })
+
+
+
+</script>
+</html>
