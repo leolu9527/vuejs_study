@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<ul id="example-2">
+    <li v-for="item in items" track-by="$index">
+        {{ parentMessage }} - {{ $index }} - {{ item.message }}
+        <span v-on:click="greet($index)">{{$index}}-111111</span>
+    </li>
+
+    <div v-for="(index, item) in items" track-by="$index">
+        {{ index }} {{ item.message }}
+    </div>
+
+
+    <ul>
+        <template v-for="item in items" track-by="$index">
+            <li>{{ item.message }}</li>
+            <li class="divider"></li>
+        </template>
+    </ul>
+</ul>
+</body>
+<script type="text/javascript">
+    //可以使用 v-for 指令基于一个数组渲染一个列表。这个指令使用特殊的语法，形式为 item in items，items 是数据数组，item 是当前数组元素的别名
+
+    //在 v-for 块内我们能完全访问父组件作用域内的属性，另有一个特殊变量 $index，正如你猜到的，它是当前数组元素的索引：
+
+    //另外，你可以为索引指定一个别名（如果 v-for 用于一个对象，则可以为对象的键指定一个别名）：
+
+    //类似于 template v-if，也可以将 v-for 用在 <template> 标签上，以渲染一个包含多个元素的块。
+
+    //Vue.js 包装了被观察数组的变异方法，故它们能触发视图更新。:example2.items.push({ message: 'Baz' })
+
+    //track-by
+
+    //track-by="$index" 包含input等组件时 注意
+
+
+    //因为 JavaScript 的限制，Vue.js 不能检测到下面数组变化：
+
+    //直接用索引设置元素，如 vm.items[0] = {}；
+    //修改数据的长度，如 vm.items.length = 0。
+    //为了解决问题 (1)，Vue.js 扩展了观察数组，为它添加了一个 $set() 方法
+
+    //example1.items.$set(0, { childMsg: 'Changed!'})
+
+    //也可以使用 v-for 遍历对象。除了 $index 之外，作用域内还可以访问另外一个特殊变量 $key。
+
+    //v-for 也可以接收一个整数，此时它将重复模板数次。； <span v-for="n in 10">{{ n }} </span>
+
+    var example2 = new Vue({
+        el: '#example-2',
+        methods:{
+            greet:function(i){
+                console.log(i);
+            }
+        },
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                {message: 'Foo' },
+                {message: 'Bar' }
+            ]
+        }
+    })
+</script>
+</html>

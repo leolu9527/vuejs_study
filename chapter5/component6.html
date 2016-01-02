@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>动态props</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="example">
+        <div>
+            <input v-model="parentMsg">{{parentMsg}}
+            <br>
+            <child somev="1" v-bind:my-message.sync="parentMsg"></child>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //动态props
+    //类似于绑定一个普通的特性到一个表达式，也可以用 v-bind 绑定动态 Props 到父组件的数据。每当父组件的数据变化时，也会传导给子组件：
+
+    //somev 使用字面量语法传递数值
+    //因为它是一个字面 prop，它的值以字符串 "1" 而不是以实际的数字传下去。如果想传递一个实际的 JavaScript 数字，需要使用动态语法，从而让它的值被当作 JavaScript 表达式
+
+    //prop 默认是单向绑定：当父组件的属性变化时，将传导给子组件，但是反过来不会。这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解。不过，也可以使用 .sync 或 .once 绑定修饰符显式地强制双向或单次绑定：
+
+    <!-- 默认为单向绑定 -->
+    //<child :msg="parentMsg"></child>
+
+        <!-- 双向绑定 -->
+    //<child :msg.sync="parentMsg"></child>
+
+        <!-- 单次绑定 -->
+    //<child :msg.once="parentMsg"></child>
+
+    //双向绑定会把子组件的 msg 属性同步回父组件的 parentMsg 属性。单次绑定在建立之后不会同步之后的变化。
+
+    Vue.component('child', {
+        // 声明 props
+        props: ['myMessage','somev'],
+        // prop 可以用在模板内
+        // 可以用 `this.msg` 设置
+        template: '<span><input v-model="myMessage">{{ myMessage }}{{somev}}</span>'
+    })
+
+    new Vue({
+        el: '#example'
+    })
+</script>
+</html>

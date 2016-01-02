@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="example">
+    <button v-on:click="greet">Greet</button>
+
+
+
+    <a v-on:click.stop="greet" href="for.html">greet</a>
+
+
+    <!-- 阻止单击事件冒泡 -->
+    <a v-on:click.prevent="greet" href="for.html">greet</a>
+
+
+    <input @keyup.enter="greet">
+
+</div>
+</body>
+<script type="text/javascript">
+
+    //有时也需要在内联语句处理器中访问原生 DOM 事件。可以用特殊变量 $event 把它传入
+    //<button v-on:click="say('hello!', $event)">Submit</button>
+
+
+    //按键修饰符
+    //在监听键盘事件时，我们经常需要检测 keyCode。Vue.js 允许为 v-on 添加按键修饰符
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            name: 'Vue.js'
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            greet: function (event) {
+                // 方法内 `this` 指向 vm
+                alert('Hello ' + this.name + '!')
+                // `event` 是原生 DOM 事件
+                alert(event.target.tagName)
+            }
+        }
+    })
+</script>
+</html>

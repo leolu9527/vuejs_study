@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="example">
+    <span>Message is: {{ message }}</span>
+    <br>
+    <input type="text" v-model="message" debounce="500" placeholder="edit me">
+
+    <br>
+
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+    <br>
+
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames | json }}</span>
+
+    <br>
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+    <br>
+
+    <select v-model="selecteds">
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selecteds }}</span>
+
+    <select v-model="selecteds" multiple>
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selecteds | json }}</span>
+
+
+    <br>
+    <input  type="checkbox" v-model="toggle1" v-bind:true-value="a" v-bind:false-value="b">{{toggle1}}
+</div>
+</body>
+<script type="text/javascript">
+//可以用 v-model 指令在表单控件元素上创建双向数据绑定。根据控件类型它自动选取正确的方法更新元素。尽管有点神奇，v-model 不过是语法糖，在用户输入事件中更新数据，以及特别处理一些极端例子。
+
+//但是有时我们想绑定值到 Vue 实例一个动态属性上。可以用 v-bind 做到。 而且 v-bind 允许绑定输入框的值到非字符串值。\
+//<input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+var vm = new Vue({
+    el: '#example',
+    data:{
+        toggle1:'vvv',
+        selecteds:'A',
+        a:'fefe',
+        b:'123'
+    }
+})
+</script>
+</html>

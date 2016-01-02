@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage('-')">Reverse Message</button>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function (i) {
+                this.message = this.message.split('').reverse().join('')+i;
+            }
+        }
+    })
+</script>
+</html>

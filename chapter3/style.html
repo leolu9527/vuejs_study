@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>class</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">1</div>
+    <div v-bind:style="styleObjectA">2</div>
+
+
+    <div v-bind:style="[styleObjectA, styleObjectB,styleObjectC]">3</div>
+</div>
+</body>
+<script type="text/javascript">
+//v-bind:style 的对象语法十分直观——看着非常像 CSS，其实它是一个 JavaScript 对象。CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）
+//直接绑定到一个样式对象通常更好，让模板更清晰：
+//同样的，对象语法常常结合返回对象的计算属性使用。
+
+//v-bind:style 的数组语法可以将多个样式对象应用到一个元素上：
+
+
+//自动添加厂商前缀
+//当 v-bind:style 使用需要厂商前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀。
+
+    var data = {
+        activeColor: 'red',
+        fontSize: 30,
+        styleObjectA: {
+            color: 'red',
+            fontSize: '13px',
+            transform: 'rotateX(0)'
+        },
+        styleObjectB: {
+            color: 'red',
+            fontSize: '13px'
+        }
+    };
+    var vm = new Vue({
+        el: '#app',
+        data: data,
+        computed: {//计算属性
+            styleObjectC: function () {
+                return {
+                    color: 'blue',
+                    fontSize: '15px'
+                }
+            }
+        }
+    });
+
+</script>
+</html>

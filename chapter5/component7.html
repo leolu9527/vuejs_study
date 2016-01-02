@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>prop 验证</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="example">
+        <input v-model="parentMsg">{{parentMsg}}
+        <example somev="1" v-bind:prop-f.sync="parentMsg"></example>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //组件可以为 props 指定验证要求。当组件给其他人使用时这很有用，因为这些验证要求构成了组件的 API，确保其他人正确地使用组件。此时 props 的值是一个对象，包含验证要求：
+    //当 prop 验证失败了，Vue 将拒绝在子组件上设置此值，如果使用的是开发版本会抛出一条警告。
+
+    //子组件可以用 this.$parent 访问它的父组件。根实例的后代可以用 this.$root 访问它。父组件有一个数组 this.$children，包含它所有的子元素
+
+    Vue.component('example', {
+        props: {
+            // 基础类型检测 （`null` 意思是任何类型都可以）
+            propA: null,
+            // 必需且是字符串
+            propB: {
+                type: String,
+                required: true,
+                default: 'lgh'
+            },
+            // 数字，有默认值
+            propC: {
+                type: Number,
+                default: 100
+            },
+            // 对象/数组的默认值应当由一个函数返回
+            propD: {
+                type: Object,
+                default: function () {
+                    return { msg: 'hello' }
+                }
+            },
+            // 指定这个 prop 为双向绑定
+            // 如果绑定类型不对将抛出一条警告
+            propE: {
+                twoWay: true
+            },
+            // 自定义验证函数
+            propF: {
+                validator: function (value) {
+                    return value > 1110
+                }
+            },
+            // 转换函数（1.0.12 新增）
+            // 在设置值之前转换值
+            propG: {
+                coerce: function (val) {
+                    return val + '' // 将值转换为字符串
+                }
+            }
+        },
+        template: '<span @click="dos"><input v-model="propF">{{ propF }}{{propC}}</span>',
+        methods:{
+            dos:function(){
+                console.log(this.$parent.parentMsg);
+            }
+        }
+    })
+
+    new Vue({
+        el: '#example'
+    })
+</script>
+</html>

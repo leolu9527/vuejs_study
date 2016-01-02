@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>插值</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message | capitalize }}
+    {{ message.split('').reverse().join('') | capitalize }}  <!--不知道为什么表达式没有过滤成功-->
+    {{{ raw_html }}}
+    <p>1:{{ a }}</p>
+    <p>2:{{* a }}</p>
+    <input v-model="a">
+
+</div>
+</body>
+<script type="text/javascript">
+    //数据绑定最基础的形式是文本插值，使用 “Mustache” 语法（双大括号）：
+    //次插值，今后的数据变化就不会再引起插值更新 {{* a}}
+    //输出真的 HTML 字符串,需要用三 Mustache 标签 {{{ raw_html }}}
+    //放在 Mustache 标签内的文本称为绑定表达式。在 Vue.js 中，一段绑定表达式由一个简单的 JavaScript 表达式和可选的一个或多个过滤器构成。
+    //表达式{{ message.split('').reverse().join('') }}
+    //Vue.js 允许在表达式后添加可选的“过滤器 (Filter) ”，以“管道符”指示： {{ message | capitalize }}
+    var data = { a: 1,raw_html:'<p>ffff</p>',message:'hello Vue.js!'};
+    var vm = new Vue({
+        el: '#app',
+        data: data,
+        created: function () {//钩子
+            // `this` 指向 vm 实例
+            console.log('a is: ' + this.a)
+        }
+    });
+
+</script>
+</html>

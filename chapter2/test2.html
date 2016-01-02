@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>指令Directives</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-if="greeting">Hello!</p>
+    <a v-bind:href="url">百度</a>
+    <a :href="url">v-bind缩写</a>
+
+
+    <a v-on:click="doSomething">doSomething</a>
+    <!-- 缩写 -->
+    <a @click="doSomething">doSomething</a>
+
+
+
+    <a v-bind:href.literal="/a/b/c">ffff</a>
+
+</div>
+</body>
+<script type="text/javascript">
+    //指令 (Directives) 是特殊的带有前缀 v- 的特性。指令的值限定为绑定表达式
+    //有些指令可以在其名称后面带一个“参数” (Argument)，中间放一个冒号隔开
+    //v-on 指令，它用于监听 DOM 事件
+    //修饰符 (Modifiers) 是以半角句号 . 开始的特殊后缀，用于表示指令应当以特殊方式绑定。例如 .literal 修饰符告诉指令将它的值解析为一个字面字符串而不是一个表达式
+    //v-bind 和 v-on 的缩写
+    var data = { a: 1,
+        message:'hello Vue.js!',
+        greeting:true,
+        url:'http://baidu.com'};
+    var vm = new Vue({
+        el: '#app',
+        data: data,
+        created: function () {//钩子
+            // `this` 指向 vm 实例
+            console.log('a is: ' + this.a)
+        },
+        methods: {
+            doSomething:function(){
+                console.log('doSomething')
+            }
+        }
+
+    });
+
+</script>
+</html>

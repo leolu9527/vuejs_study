@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>组件选项</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="example">
+        <A-component>dfefef</A-component>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //入 Vue 构造器的多数选项也可以用在 Vue.extend() 中，不过有两个特例： data and el。试想如果我们简单地把一个对象作为 data 选项传给 Vue.extend()
+
+    var MyComponent = Vue.extend({
+        data: function () {
+            return { a: 1 }
+        },
+        el:function () {
+            return {}
+        }
+    })
+    new Vue({
+        el: '#example'
+    })
+</script>
+</html>
