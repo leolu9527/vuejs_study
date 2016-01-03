@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+<div id="demo" >
+
+    <span v-text="msg | reverse"></span>
+
+    <span v-text="msg | wrap 'before' 'after'"></span>
+
+
+    <input v-model="some |currencyDisplay" value="1">
+
+</div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+    //类似于自定义指令，可以用全局方法 Vue.filter() 注册一个自定义过滤器，它接收两个参数：过滤器 ID 和过滤器函数。过滤器函数以值为参数，返回转换后的值
+    //过滤器函数可以接收任意数量的参数：
+
+
+
+    Vue.filter('reverse', function (value) {
+        return value.split('').reverse().join('');
+    })
+
+    Vue.filter('wrap', function (value, begin, end) {
+        return begin + value + end
+    })
+
+
+    //双向过滤器
+    Vue.filter('currencyDisplay', {
+        // model -> view
+        // 在更新 `<input>` 元素之前格式化值
+        read: function(val) {
+            return '$'+val.toFixed(2)
+        },
+        // view -> model
+        // 在写回数据之前格式化值
+        write: function(val, oldVal) {
+            var number = +val.replace(/[^\d.]/g, '');
+            return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
+        }
+    })
+
+
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            msg: 'hello!',
+            some:'2'
+        }
+    })
+
+
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>混合</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+
+<body>
+
+
+</body>
+<script type="text/javascript">
+    //混合以一种灵活的方式为组件提供分布复用功能。混合对象可以包含任意的组件选项。当组件使用了混合对象时，混合对象的所有选项将被“混入”组件自己的选项中
+    //当混合对象与组件包含同名选项时，这些选项将以适当的策略合并。例如，同名钩子函数被并入一个数组，因而都会被调用。另外，混合的钩子将在组件自己的钩子之前调用
+    //值为对象的选项，如 methods, components 和 directives 将合并到同一个对象内。如果键冲突则组件的选项优先。
+
+
+
+    // 定义一个混合对象
+    var myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log('hello from mixin!')
+            }
+        }
+    }
+
+    // 定义一个组件，使用这个混合对象
+    var Component = Vue.extend({
+        mixins: [myMixin]
+    })
+
+    var component = new Component() // -> "hello from mixin!"
+
+
+
+
+    //----------------------------------------------------------------
+
+    Vue.mixin({
+        created: function () {
+            var myOption = this.$options.myOption
+            if (myOption) {
+                console.log(myOption)
+            }
+        }
+    })
+
+    new Vue({
+        myOption: 'hello!'
+    })
+
+</script>
+</html>

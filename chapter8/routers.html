@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>嵌套路由</title>
+    <script type="text/javascript" src="../vue.js"></script>
+    <script type="text/javascript" src="../vue-router.js"></script>
+    <script type="text/javascript" src="../vue-resource.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <a v-link="{ path: '/foo' }">Go to /foo</a>
+        <a v-link="{ path: '/foo/bar/lgh' }">Go to /foo/bar</a>
+        <a v-link="{ path: '/foo/bar/lgh/fefef/fe' }">Go to /foo/bar</a>
+        <a v-link="{ path: '/foo/baz' }">Go to /foo/baz</a>
+    </p>
+    <router-view></router-view>
+
+
+    <template id="Bar">
+        <p>This is bar!</p>{{json.name}}
+    </template>
+
+    <template id="Baz">
+        <p>This is baz!{{$route.params.username}}</p>
+
+    </template>
+
+</div>
+<script type="text/javascript">
+    // define some components
+    var Foo = Vue.extend({
+        template:
+        '<div class="foo">' +
+        '<h2>{{$route.path}} -{{$route.params }}</h2>' +
+        '<router-view></router-view>' + // <- nested outlet
+        '</div>'
+    })
+
+    var Bar = Vue.extend({
+        template: '#Bar',
+        data:function () {
+            return { json:{} }
+        },
+        ready: function() {
+            this.$http.get('test.json').then(function(res){
+                this.$set('json',res.data);
+                console.log(res.data);
+            }).catch(function(){
+
+            });
+        }
+    })
+
+    var Baz = Vue.extend({
+        template: '#Baz'
+    })
+
+    // configure router
+    var router = new VueRouter()
+
+    router.map({
+        '/foo': {
+            component: Foo,
+            // add a subRoutes map under /foo
+            subRoutes: {
+                '/': {
+                    // This component will be rendered into Foo's <router-view>
+                    // when /foo is matched. Using an inline component definition
+                    // here for convenience.
+                    component: {
+                        template: '<p>Default sub view for Foo</p>'
+                    }
+                },
+                '/bar/:username': {
+                    // Bar will be rendered inside Foo's <router-view>
+                    // when /foo/bar is matched
+                    component: Bar
+                },
+                '/bar/*username': {
+                    // Bar will be rendered inside Foo's <router-view>
+                    // when /foo/bar is matched
+                    component: Bar
+                }
+                ,
+                '/baz': {
+                    // same for Baz, but only when /foo/baz is matched
+                    component: Baz
+                }
+            }
+        }
+    })
+
+    // start app
+    var App = Vue.extend({
+
+    })
+    router.start(App, '#app')
+</script>
+</body>
+</html>

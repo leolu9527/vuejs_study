@@ -9,16 +9,45 @@
 
 </style>
 <body>
-<div id="demo" v-demo:hello.a.b="msg"></div>
+<div id="demo" >
+
+    <div v-demo:hello.a.b="msg" v-bind:a="someValue">111</div>
+
+    <div v-demog="{color: 'white', text: 'hello!' }">111</div>
+
+    <my-directive>11</my-directive>
 
 
-<div v-demog="{color: 'white', text: 'hello!' }"></div>
+</div>
+
+
+
 
 
 </body>
 <script type="text/javascript">
 //除了内置指令，Vue.js 也允许注册自定义指令。自定义指令提供一种机制将数据的变化映射为 DOM 行为。
 //可以用 Vue.directive(id, definition) 方法注册一个全局自定义指令，它接收两个参数指令 ID 与定义对象。也可以用组件的 directives 选项注册一个局部自定义指令。
+
+//v-demo:hello.a.b="msg"  放到<div id="demo" v-demo:hello.a.b="msg">上的话，指令demog不起作用
+
+//当指令使用了字面修饰符，它的值将按普通字符串处理并传递给 update 方法。update 方法将只调用一次，因为普通字符串不能响应数据变化。
+//<div v-demo.literal="foo bar baz">
+
+//如果自定义指令用在一个对象上，当对象内部属性变化时要触发 update，则在指令定义对象中指定 deep: true。
+
+
+//元素指令
+
+Vue.elementDirective('my-directive', {
+    // API 同普通指令
+    deep: true,
+    bind: function () {
+        // 操作 this.el...
+    }
+})
+
+
 
 Vue.directive('my-directive', {
     bind: function () {
@@ -38,8 +67,15 @@ Vue.directive('my-directive', {
 
 
 Vue.directive('demo', {
+    params: ['a'],//自定义指令可以接收一个 params 数组,指定一个特性列表,Vue 编译器将自动提取绑定元素的这些特性，也支持动态属性。this.params[key] 会自动保持更新。另外，可以指定一个回调，在值变化时调用
+    paramWatchers: {
+        a: function (val, oldVal) {
+            console.log('a changed!')
+        }
+    },
     bind: function () {
-        console.log('demo bound!')
+        console.log('demo bound!');
+        console.log(this.params.a);
     },
     update: function (value) {
         this.el.innerHTML =
@@ -52,9 +88,12 @@ Vue.directive('demo', {
 })
 
 
-Vue.directive('demog', function (value) {
-    console.log(value.color) // "white"
-    console.log(value.text) // "hello!"
+Vue.directive('demog', {
+    update: function (value) {
+        console.log(value.color) // "white"
+        console.log(value.text) // "hello!"
+    }
+
 });
 
 
