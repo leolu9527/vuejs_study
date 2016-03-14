@@ -7,19 +7,21 @@
 </head>
 <body>
 <div id="app">
-    <p>{{ message }}</p>
-    <button v-on:click="reverseMessage('-')">Reverse Message</button>
+    <p>{{count}}:{{ message }}</p>
+    <button v-on:click="reverseMessage()">Reverse Message</button>
 </div>
 </body>
 <script type="text/javascript">
     new Vue({
         el: '#app',
         data: {
+            count:1,
             message: 'Hello Vue.js!'
         },
         methods: {
             reverseMessage: function (i) {
-                this.message = this.message.split('').reverse().join('')+i;
+                this.count++;
+                this.message = this.message.split('').reverse().join('');
             }
         }
     })
