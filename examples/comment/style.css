@@ -186,6 +186,8 @@ a:link {
     padding: 2%;
     font-size: 16px;
     resize: none;
+    box-shadow: none;
+    -webkit-appearance: none;
 }
 
 .suggestion .left-word{
@@ -195,6 +197,28 @@ a:link {
     color: #acacac;
     font-size: 14px;
 }
+
+.preset-words .t{
+    font-size: 12px;
+    color: #fd9131;
+}
+
+.preset-words .word{
+    margin:5px 5px 5px 0px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid #E8E1E1;
+    display: inline-block;
+    font-size: 14px;
+    color: #acacac;
+}
+
+
+.preset-words .word.on{
+    color: #fd9131;
+    border: 1px solid #fd9131;
+}
+
 
 button.submit{
     width: 100%;

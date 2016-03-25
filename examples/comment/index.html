@@ -14,7 +14,7 @@
     <div class="topbar">
         <i class="backico fa fa-angle-left"></i>
         <span class="title">发表评论</span>
-        <a href="tel:0000000"><i class="fa fa-phone"></i></a>
+        <a href="tel:400-890-1389"><i class="fa fa-phone"></i></a>
     </div>
     <div class="servicelist">
         <ul class="clearfix">
@@ -46,6 +46,14 @@
                 <i  v-bind:class="[rate>4?rateClassOn:rateClassOff]" class="fa"></i></li>
         </ul>
         <p v-if="!rate" class="tips">完成匿名评价,获得现金返还</p>
+        <div v-if="rate>3" class="preset-words martop10">
+            <span class="t">请选择标签</span>
+            <div class="clearfix">
+                <template v-for="word in presetWords">
+                    <span v-bind:class="{ 'on': (selectWords.indexOf(word)==-1)?false:true}" class="word" @click="selectWord(word)"><span>{{word}}</span><i class="fa fa-thumbs-o-up"></i></span>
+                </template>
+            </div>
+        </div>
         <div v-if="rate>0" class="suggestion">
             <textarea rows="4" placeholder="意见和建议(内容技师不可见)" v-model="suggestion"></textarea>
             <span class="left-word">{{leftwords}}</span>
@@ -66,7 +74,9 @@
             rateClassOn:'fa-star',
             rateClassOff:'fa-star-o',
             suggestion:'',
-            maxlong:200
+            maxlong:50,
+            presetWords:['效果明显','态度好服务棒','手法熟练','力度均匀'],
+            selectWords:[]
         },
         computed: {
             leftwords: function () {
@@ -77,28 +87,42 @@
                     })
                     return 0
                 }
-
                 return left
             }
         },
         methods: {
-            setrate: function (num) {
+            setrate: function (num) {//打分
                 if(this.rate==num){
                     return
+                }
+                if(this.rate<4){
+                    this.selectWords=[]
                 }
                 this.rate=num
             },
             tijiao: function () {
-
+                this.$http.post('xxxx/xxxxx',{"selectWords":this.selectWords}).then(function (response) {
+                    console.log(response.data)
+                }, function (response) {
+                    console.log('error')
+                })
             },
             load: function () {//load
                 var self = this
                 this.$http.get('data/items.json').then(function (response) {
                     self.$set('items', response.data)
-                    console.log(response.data)
+                    //console.log(response.data)
                 }, function (response) {
                     console.log('error')
                 })
+            },
+            selectWord: function (word) {
+                if(this.selectWords.indexOf(word)==-1){
+                    this.selectWords.push(word)
+                }else{
+                    this.selectWords.$remove(word)
+                }
+                console.log(this.selectWords);
             }
         }
     });
