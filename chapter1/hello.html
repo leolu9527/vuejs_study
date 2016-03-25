@@ -9,6 +9,9 @@
 <div id="app">
     <p>{{ message }}</p>
     <input v-model="message">
+    <pre>
+        {{$data | json}}
+    </pre>
 </div>
 </body>
 <script type="text/javascript">

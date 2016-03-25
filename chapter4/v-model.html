@@ -50,10 +50,12 @@
     </select>
     <br>
     <span>Selected: {{ selecteds | json }}</span>
-
-
     <br>
     <input  type="checkbox" v-model="toggle1" v-bind:true-value="a" v-bind:false-value="b">{{toggle1}}
+
+
+
+    <input v-model="age" number>
 </div>
 </body>
 <script type="text/javascript">
@@ -67,7 +69,9 @@ var vm = new Vue({
         toggle1:'vvv',
         selecteds:'A',
         a:'fefe',
-        b:'123'
+        b:'123',
+        checkedNames: [],
+        age:1
     }
 })
 </script>

@@ -8,7 +8,7 @@
 <body>
 
     <div id="example">
-        <child my-message="hello!!"></child>
+        <child my-message="hello!!" some="feheiug"></child>
     </div>
 
 </body>
@@ -21,16 +21,20 @@
     //HTML 特性不区分大小写。名字形式为 camelCase 的 prop 用作特性时，需要转为 kebab-case（短横线隔开）：
 
     Vue.component('child', {
+        data: function () {
+            return {some:1}
+        },
         // 声明 props
         props: ['myMessage'],
         // prop 可以用在模板内
         // 可以用 `this.msg` 设置
-        template: '<span>{{ myMessage }}</span>'
+        template: '<span>{{ some }}</span>'
     })
 
 
     new Vue({
-        el: '#example'
+        el: '#example',
+        data:{some:'wowowowoow'}
     })
 </script>
 </html>

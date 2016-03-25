@@ -7,10 +7,10 @@
 </head>
 <body>
 <div id="example">
-    a={{ a }}, b={{ b }}
+    <br>a={{ a }}, b={{ b }}
+    <br>{{lastName}}
 
-
-    fullName:{{fullName}}
+    <br>fullName:{{fullName}}
 </div>
 
 </body>
@@ -31,16 +31,16 @@
             // 一个计算属性的 getter
             b: function () {
                 // `this` 指向 vm 实例
-                return this.a + 1
+                return this.a + 1;
             },
             fullName:{
                 get:function(){
                     return this.firstName + ' ' + this.lastName;//比$watch更简单
                 },
                 set:function(newValue){
-                    var names = newValue.split(' ')
-                    this.firstName = names[0]
-                    this.lastName = names[names.length - 1]
+                    var names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
                 }
             }
         }

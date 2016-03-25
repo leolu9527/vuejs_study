@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>订单评价</title>
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/vue-resource/0.7.0/vue-resource.min.js"></script>
+</head>
+<body>
+<div id="app" class="view-container">
+    <div class="topbar">
+        <i class="backico fa fa-angle-left"></i>
+        <span class="title">发表评论</span>
+        <a href="tel:0000000"><i class="fa fa-phone"></i></a>
+    </div>
+    <div class="servicelist">
+        <ul class="clearfix">
+            <li v-for="item in items" class="clearfix serviceitem">
+                <div class="avatar l"><img src="ucpic.jpg"></div>
+                <div class="techinfo l">
+                    <p class="techname">{{item.name}}</p>
+                    <p class="time">2016-03-09 09:30</p>
+                </div>
+                <div class="moreinfo r">
+                    <p class="fee">￥{{item.price}}</p>
+                    <p class="itemname">{{item.itemname}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="h-line"><span>评价技师</span></div>
+    <div class="order-comment">
+        <ul class="rate clearfix">
+            <li @click="setrate(1)">
+                <i  v-bind:class="[rate>0?rateClassOn:rateClassOff]" class="fa"></i></li>
+            <li @click="setrate(2)">
+                <i  v-bind:class="[rate>1?rateClassOn:rateClassOff]" class="fa"></i></li>
+            <li @click="setrate(3)">
+                <i  v-bind:class="[rate>2?rateClassOn:rateClassOff]" class="fa"></i></li>
+            <li @click="setrate(4)">
+                <i  v-bind:class="[rate>3?rateClassOn:rateClassOff]" class="fa"></i></li>
+            <li @click="setrate(5)">
+                <i  v-bind:class="[rate>4?rateClassOn:rateClassOff]" class="fa"></i></li>
+        </ul>
+        <p v-if="!rate" class="tips">完成匿名评价,获得现金返还</p>
+        <div v-if="rate>0" class="suggestion">
+            <textarea rows="4" placeholder="意见和建议(内容技师不可见)" v-model="suggestion"></textarea>
+            <span class="left-word">{{leftwords}}</span>
+        </div>
+        <button v-if="rate>0" @click="tijiao" class="submit">发表评价</button>
+    </div>
+</div>
+
+<script>
+    var comment=new Vue({
+        el: '#app',
+        ready: function () {
+            this.load()
+        },
+        data: {
+            items:{},
+            rate: 0,
+            rateClassOn:'fa-star',
+            rateClassOff:'fa-star-o',
+            suggestion:'',
+            maxlong:200
+        },
+        computed: {
+            leftwords: function () {
+                var left=this.maxlong-this.suggestion.length
+                if(left<=0){
+                    this.$nextTick(function () {
+                        this.$set('suggestion',this.suggestion.substring(0,this.maxlong))
+                    })
+                    return 0
+                }
+
+                return left
+            }
+        },
+        methods: {
+            setrate: function (num) {
+                if(this.rate==num){
+                    return
+                }
+                this.rate=num
+            },
+            tijiao: function () {
+
+            },
+            load: function () {//load
+                var self = this
+                this.$http.get('data/items.json').then(function (response) {
+                    self.$set('items', response.data)
+                    console.log(response.data)
+                }, function (response) {
+                    console.log('error')
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>

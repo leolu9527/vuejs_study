@@ -1,0 +1,211 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+}
+
+
+body {
+    font-size: 10px;
+    font-family: tahoma, stheiti, "Droid Sans", "Microsoft Yahei", arial;
+    font-style: initial;
+    position: relative;
+    background: #fff;
+}
+
+.red{color: red;}
+.container-fluid {
+    padding: 0;
+    min-width: 320px;
+}
+
+i {
+    font-style: initial;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.clearfix {
+    *zoom: 1
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.l {
+    float: left;
+}
+
+.r {
+    float: right;
+}
+.martop10{margin-top:10px !important;}
+
+
+.view-container{padding: 0;
+    min-width: 320px;
+    padding-top: 50px;
+}
+
+
+.topbar{background: #fff;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    text-align: center;border-bottom:1px solid #E8E1E1;
+    width: 100%;
+    top: 0;
+    position: fixed;
+}
+
+.topbar .backico{position: absolute;
+    left: 15px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2eb676;
+    width: 50px;
+    text-align: left;}
+.topbar a{position: absolute;
+    right: 15px;
+    font-size: 20px;
+    top: 0px;
+    color: #2eb676;display: block;width: 20px;height: 20px;}
+.topbar .title{font-size: 18px;color: #000;}
+
+.servicelist{
+    padding:10px 15px;
+}
+
+.servicelist .avatar img{
+    display: block;
+    border: 1px solid #E4E4E4;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    opacity: 1;
+    background: url('ucpic.jpg') no-repeat;
+    background-size: 80px 80px;
+    -webkit-background-size: 80px 80px;
+}
+
+.servicelist .techinfo{
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.servicelist .techinfo .techname{
+    color: #000;
+    font-size: 18px;
+}
+
+.servicelist .techinfo .time{
+    color:#999;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.servicelist .moreinfo{
+    padding-top: 15px;
+}
+
+.servicelist .moreinfo .fee{
+    color: #fd9131;
+    font-size: 18px;
+    text-align: right;
+}
+
+.servicelist .moreinfo .itemname{
+    color: #2eb676;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.servicelist .serviceitem{
+    padding: 10px 0;
+    border-bottom: 1px solid #E8E1E1;
+}
+.servicelist .serviceitem:last-child{
+    border-bottom: none;
+}
+
+.h-line{margin:20px 30px 0;height: 1px;border-top: 1px solid #E8E1E1;position: relative;}
+
+.h-line span{display: block;width: 100px;height:20px;line-height: 20px;
+    margin: 0 auto;text-align: center;background: #fff;margin-top:-10px;
+    font-size: 16px;color: #acacac;
+}
+
+.order-comment{
+    margin:25px 40px;
+}
+
+.order-comment .rate li{
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.order-comment .rate li i{
+    font-size:40px;
+    color: #fd9131;
+}
+
+.order-comment .rate li i.fa-star-o{
+    color: #acacac;
+}
+
+
+.order-comment .suggestion{
+    margin:20px 0px;
+    position: relative;
+}
+.order-comment .suggestion textarea{
+    width: 96%;
+    border: 1px solid #E8E1E1;
+    border-radius: 4px;
+    padding: 2%;
+    font-size: 16px;
+    resize: none;
+}
+
+.suggestion .left-word{
+    position: absolute;
+    right: 7px;
+    bottom: 9px;
+    color: #acacac;
+    font-size: 14px;
+}
+
+button.submit{
+    width: 100%;
+    background: #2eb676;
+    color: #fff;
+    height: 50px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius:4px;
+}
+
+.tips{color: #fd9131;font-size: 14px;text-align: center;height: 30px;line-height: 30px;}

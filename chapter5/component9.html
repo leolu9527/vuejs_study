@@ -35,7 +35,7 @@
         methods: {
             notify: function () {
                 if (this.msg.trim()) {
-                    this.$dispatch('child-msg', this.msg)
+                    this.$dispatch('child-msg', this.msg,1);
                     this.msg = ''
                 }
             }
@@ -59,9 +59,10 @@
         },
         // 在创建实例时 `events` 选项简单地调用 `$on`
         events: {
-            'child-msg': function (msg) {
+            'child-msg': function (msg,i) {
                 // 事件回调内的 `this` 自动绑定到注册它的实例上
-                this.messages.push(msg)
+                this.messages.push(msg);
+                console.log(i+1);
             }
         },
         methods:{

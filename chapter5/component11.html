@@ -17,8 +17,8 @@
 <div id="demo">
 
     <!-- 先淡出再淡入 -->
-    <div :is="currentView" transition="fade" transition-mode="out-in">
-    </div>
+    <component :is="currentView" keep-alive>
+    </component>
 
     <input type="radio" value="home" v-model="currentView"  checked name="view">a
     <input type="radio" value="posts" v-model="currentView" name="view">b

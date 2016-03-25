@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../vue.js"></script>
 </head>
 <body>
-<div id="example">{{msg}}</div>
+<div id="example">{{msg}}{{example}}</div>
 </body>
 <script type="text/javascript">
 //vm.someData = 'new value'，DOM 不会立即更新
@@ -28,11 +28,11 @@ var vm = new Vue({
                 return Date.now() + this.msg
             }
         }
-})
-vm.msg = 'new message' // 修改数据
+}});
+vm.msg = 'new message'; // 修改数据
 //vm.$el.textContent === 'new message' // false
 Vue.nextTick(function () {
-    vm.$el.textContent === 'new message' // true
+    vm.$el.textContent === 'new message'; // true
     console.log('update DOM');
 })
 

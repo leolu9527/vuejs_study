@@ -60,7 +60,7 @@
                 }
             }
         },
-        template: '<span @click="dos"><input v-model="propF">{{ propF }}{{propC}}</span>',
+        template: '<span @click="dos">点击<input v-model="propF">{{ propF }}{{propC}}</span>',
         methods:{
             dos:function(){
                 console.log(this.$parent.parentMsg);

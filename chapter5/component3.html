@@ -8,7 +8,7 @@
 <body>
 
     <div id="example">
-        <A-component>dfefef</A-component>
+        <a-component>dfefef</a-component>
     </div>
 
 </body>
@@ -16,19 +16,20 @@
     // 为了让事件更简单，可以直接传入选项对象而不是构造器给 Vue.component() 和 component 选项。Vue.js 在背后自动调用 Vue.extend()：
     // 在一个步骤中扩展与注册
     Vue.component('my-component', {
-        template: '<div>A custom component!</div>'
+        template: '<div>a custom component!</div>'
     })
 
     // 局部注册也可以这么做
     var Parent = Vue.extend({
+        template: '...',
         components: {
-            'B-component': {
-                template: '<div>A custom component!</div>'
+            'b-component': {
+                template: '<div>b custom component!</div>'
             }
         }
     })
 
-    Vue.component('A-component', Parent);
+    Vue.component('a-component', Parent);
     // 创建根实例
     new Vue({
         el: '#example'
